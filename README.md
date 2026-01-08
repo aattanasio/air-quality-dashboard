@@ -78,5 +78,6 @@ src/
 ```
 
 # Author
-GitHub: ([aattanasio](https://github.com/aattanasio))
+GitHub: ([aattanasio](https://github.com/aattanasio)) 
+
 Portfolio: ([asjaattanasio.it/projects](asjaattanasio.it/projects))
