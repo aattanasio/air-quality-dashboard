@@ -1,4 +1,3 @@
-// This defines what the OpenWeatherMap API returns
 export interface AirQualityResponse {
     coord: {
         lon: number;  // Longitude
@@ -42,4 +41,45 @@ export interface Location {
     state?: string;  // Optional (not all cities have states)
     lat: number;
     lon: number;
+}
+
+// Existing interfaces stay the same...
+
+// Weather API Types
+export interface WeatherData {
+    main: {
+        temp: number;
+        feels_like: number;
+        humidity: number;
+        pressure: number;
+    };
+    weather: Array<{
+        id: number;
+        main: string;
+        description: string;
+        icon: string;
+    }>;
+    wind: {
+        speed: number;
+        deg: number;
+    };
+    dt: number;
+}
+
+export interface WeatherForecast {
+    list: Array<{
+        dt: number;
+        main: {
+            temp: number;
+            humidity: number;
+        };
+        weather: Array<{
+            main: string;
+            description: string;
+            icon: string;
+        }>;
+        wind: {
+            speed: number;
+        };
+    }>;
 }

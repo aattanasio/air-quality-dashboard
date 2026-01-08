@@ -38,20 +38,14 @@ export function AirQualityCard({ aqi, location, timestamp, isSaved, onToggleSave
                 />
             </button>
 
-            {/* Location header */}
-            <div className="flex justify-between items-start mb-4 pr-12">
-                <div className="flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-gray-500" />
-                    <h3 className="text-xl font-semibold text-gray-800">{location}</h3>
-                </div>
-                <div className="flex items-center gap-1 text-gray-500">
-                    <Clock className="w-4 h-4" />
-                    <span className="text-sm">{formattedTime}</span>
-                </div>
+            {/* Location header - now without timestamp */}
+            <div className="flex items-center gap-2 mb-4 pr-12">
+                <MapPin className="w-5 h-5 text-gray-500" />
+                <h3 className="text-xl font-semibold text-gray-800">{location}</h3>
             </div>
 
-            {/* AQI badge */}
-            <div className="flex items-center gap-4">
+            {/* AQI badge and info */}
+            <div className="flex items-center gap-4 mb-3">
                 <div
                     className={`
             ${aqiInfo.color}
@@ -72,6 +66,12 @@ export function AirQualityCard({ aqi, location, timestamp, isSaved, onToggleSave
                         {aqiInfo.description}
                     </p>
                 </div>
+            </div>
+
+            {/* Timestamp in bottom-right corner */}
+            <div className="flex items-center justify-end gap-1 text-gray-400 text-xs">
+                <Clock className="w-3 h-3" />
+                <span>Updated {formattedTime}</span>
             </div>
         </div>
     );
