@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Wind, AlertCircle, Heart } from 'lucide-react';
+import { Wind, AlertCircle } from 'lucide-react';
 import { useAirQuality } from './hooks/useAirQuality';
 import { useGeolocation } from './hooks/useGeolocation';
 import { useLocationName } from './hooks/useLocationName';
@@ -48,27 +48,29 @@ function App() {
     if (lat === null || lon === null) return;
 
     // Check if already saved
-    const alreadySaved = savedLocations.some(
+    const existingLocation = savedLocations.find(
       loc => loc.lat === lat && loc.lon === lon
     );
 
-    if (alreadySaved) {
-      alert('This location is already saved!');
-      return;
+    if (existingLocation) {
+      // Remove if already saved
+      setSavedLocations(savedLocations.filter(loc => loc.id !== existingLocation.id));
+    } else {
+      // Add if not saved
+      const newLocation: SavedLocation = {
+        id: `${lat}-${lon}-${Date.now()}`,
+        name: displayName.split(',')[0].trim(),
+        country: displayName.split(',').slice(-1)[0].trim(),
+        state: displayName.split(',').length > 2 ? displayName.split(',')[1].trim() : undefined,
+        lat,
+        lon,
+        savedAt: Date.now()
+      };
+
+      setSavedLocations([...savedLocations, newLocation]);
     }
-
-    const newLocation: SavedLocation = {
-      id: `${lat}-${lon}-${Date.now()}`,
-      name: displayName.split(',')[0].trim(), // Just city name
-      country: displayName.split(',').slice(-1)[0].trim(), // Last part is country
-      state: displayName.split(',').length > 2 ? displayName.split(',')[1].trim() : undefined,
-      lat,
-      lon,
-      savedAt: Date.now()
-    };
-
-    setSavedLocations([...savedLocations, newLocation]);
   };
+
 
   const handleRemoveLocation = (id: string) => {
     setSavedLocations(savedLocations.filter(loc => loc.id !== id));
@@ -121,6 +123,8 @@ function App() {
                   aqi={data.list[0].main.aqi}
                   location={selectedLocationName || (locationLoading ? 'Loading location...' : displayName)}
                   timestamp={new Date(data.list[0].dt * 1000)}
+                  isSaved={isCurrentLocationSaved}
+                  onToggleSave={handleSaveLocation}
                 />
 
                 <HealthRecommendation aqi={data.list[0].main.aqi} />
@@ -128,25 +132,6 @@ function App() {
                 <PollutantDetails
                   pollutants={data.list[0].components}
                 />
-
-                {/* Save location button */}
-                <button
-                  onClick={handleSaveLocation}
-                  disabled={isCurrentLocationSaved}
-                  className={`
-                    w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg
-                    font-medium transition-all
-                    ${isCurrentLocationSaved
-                      ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                      : 'bg-white text-blue-600 hover:bg-blue-50 shadow-md hover:shadow-lg'
-                    }
-                  `}
-                >
-                  <Heart
-                    className={`w-5 h-5 ${isCurrentLocationSaved ? 'fill-current' : ''}`}
-                  />
-                  {isCurrentLocationSaved ? 'Location Saved' : 'Save This Location'}
-                </button>
               </div>
 
               {/* Saved locations sidebar */}
