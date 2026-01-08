@@ -35,7 +35,7 @@ People with respiratory conditions, allergies, or health-conscious individuals n
 ### Prerequisites
 
 - Node.js 18+ installed
-- OpenWeatherMap API key ([Get one free here](https://openweathermap.org/api))
+- OpenWeatherMap API key
 
 ### Installation
 
@@ -78,5 +78,5 @@ src/
 ```
 
 # Author
-GitHub: @aattanasio
-Portfolio: asjaattanasio.it/projects
+GitHub: ([aattanasio](https://github.com/aattanasio))
+Portfolio: ([asjaattanasio.it/projects](asjaattanasio.it/projects))
