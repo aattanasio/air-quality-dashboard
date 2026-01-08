@@ -9,6 +9,7 @@ import { AirQualityCard } from './components/AirQualityCard';
 import { HealthRecommendation } from './components/HealthRecommendation';
 import { LocationSearch } from './components/LocationSearch';
 import { SavedLocations } from './components/SavedLocations';
+import { PollutantDetails } from './components/PollutantDetails';
 
 interface SavedLocation {
   id: string;
@@ -123,6 +124,10 @@ function App() {
                 />
 
                 <HealthRecommendation aqi={data.list[0].main.aqi} />
+
+                <PollutantDetails
+                  pollutants={data.list[0].components}
+                />
 
                 {/* Save location button */}
                 <button
