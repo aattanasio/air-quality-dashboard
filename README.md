@@ -80,4 +80,4 @@ src/
 # Author
 GitHub: ([aattanasio](https://github.com/aattanasio)) 
 
-Portfolio: ([asjaattanasio.it/projects](asjaattanasio.it/projects))
+Portfolio: ([asjaattanasio.it/projects](https://asjaattanasio.it/projects))
