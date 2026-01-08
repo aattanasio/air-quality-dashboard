@@ -1,67 +1,61 @@
+import { Wind, AlertCircle } from 'lucide-react';
 import { useAirQuality } from './hooks/useAirQuality';
 import { useGeolocation } from './hooks/useGeolocation';
-import { useLocalStorage } from './hooks/useLocalStorage';
+import { useLocationName } from './hooks/useLocationName';
+import { LoadingSpinner } from './components/LoadingSpinner';
+import { AirQualityCard } from './components/AirQualityCard';
+import { HealthRecommendation } from './components/HealthRecommendation';
 
 function App() {
-  // Test geolocation hook
   const { latitude, longitude, error: geoError, loading: geoLoading } = useGeolocation();
-
-  // Test air quality hook (only when we have coordinates)
   const { data, loading, error } = useAirQuality(latitude, longitude);
-
-  // Test localStorage hook
-  const [visitCount, setVisitCount] = useLocalStorage('visitCount', 0);
-
-  // Increment visit count on first render
-  if (visitCount === 0) {
-    setVisitCount(1);
-  }
+  const { locationName, loading: locationLoading } = useLocationName(latitude, longitude);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-6 space-y-4">
-        <h1 className="text-3xl font-bold text-gray-800">
-          Testing Custom Hooks
-        </h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-400 to-blue-600 p-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Header with icon */}
+        <div className="flex items-center justify-center gap-3 mb-8">
+          <Wind className="w-10 h-10 text-white" />
+          <h1 className="text-4xl font-bold text-white text-center">
+            Air Quality Dashboard
+          </h1>
+        </div>
 
-        {/* Geolocation test */}
-        <div className="border-b pb-4">
-          <h2 className="text-xl font-semibold mb-2">Geolocation Hook</h2>
-          {geoLoading && <p className="text-blue-600">Getting your location...</p>}
-          {geoError && <p className="text-red-600">Error: {geoError}</p>}
-          {latitude && longitude && (
-            <p className="text-green-600">
-              Location: {latitude.toFixed(4)}, {longitude.toFixed(4)}
+        {/* Loading state */}
+        {(geoLoading || loading) && (
+          <div className="bg-white rounded-lg p-12">
+            <LoadingSpinner size="large" />
+            <p className="text-center mt-4 text-gray-600">
+              {geoLoading ? 'Getting your location...' : 'Loading air quality data...'}
             </p>
-          )}
-        </div>
+          </div>
+        )}
 
-        {/* Air quality test */}
-        <div className="border-b pb-4">
-          <h2 className="text-xl font-semibold mb-2">Air Quality Hook</h2>
-          {loading && <p className="text-blue-600">Loading air quality data...</p>}
-          {error && <p className="text-red-600">Error: {error}</p>}
-          {data && (
-            <div className="text-green-600">
-              <p>AQI: {data.list[0].main.aqi}</p>
-              <p>PM2.5: {data.list[0].components.pm2_5.toFixed(2)} μg/m³</p>
+        {/* Error state */}
+        {(geoError || error) && (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+            <div className="flex items-center gap-3">
+              <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
+              <p className="text-red-800">
+                {geoError || error}
+              </p>
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
-        {/* localStorage test */}
-        <div>
-          <h2 className="text-xl font-semibold mb-2">LocalStorage Hook</h2>
-          <p className="text-gray-700">
-            You've visited this page {visitCount} time(s)
-          </p>
-          <button
-            onClick={() => setVisitCount(visitCount + 1)}
-            className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
-            Increment Count
-          </button>
-        </div>
+        {/* Data loaded successfully */}
+        {data && !loading && (
+          <div className="space-y-6">
+            <AirQualityCard
+              aqi={data.list[0].main.aqi}
+              location={locationLoading ? 'Loading location...' : locationName}
+              timestamp={new Date(data.list[0].dt * 1000)}
+            />
+
+            <HealthRecommendation aqi={data.list[0].main.aqi} />
+          </div>
+        )}
       </div>
     </div>
   );

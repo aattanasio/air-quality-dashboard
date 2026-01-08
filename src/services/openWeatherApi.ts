@@ -47,5 +47,16 @@ export const openWeatherApi = {
     async searchLocation(query: string): Promise<Location[]> {
         const url = `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.GEOCODING}?q=${encodeURIComponent(query)}&limit=5&appid=${API_KEY}`;
         return fetchFromAPI<Location[]>(url);
+    },
+
+    /**
+   * Get location name from coordinates (reverse geocoding)
+   * @param lat - Latitude
+   * @param lon - Longitude
+   * @returns Location information
+   */
+    async reverseGeocode(lat: number, lon: number): Promise<Location[]> {
+        const url = `${API_CONFIG.BASE_URL}/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${API_KEY}`;
+        return fetchFromAPI<Location[]>(url);
     }
 };
