@@ -27,10 +27,8 @@ export function AirQualityCard({ aqi, location, timestamp, isSaved, onToggleSave
                     onClick={onToggleSave}
                     className={`
           absolute top-6 right-6 p-2.5 rounded-xl transition-all shadow-sm hover:shadow-md z-10
-          ${isSaved
-                            ? 'bg-red-50 text-red-500 ring-2 ring-red-200'
-                            : 'bg-gray-50 text-gray-400 hover:bg-red-50 hover:text-red-500 hover:ring-2 hover:ring-red-100'
-                        }
+          bg-gray-50 hover:bg-red-50 hover:ring-2 hover:ring-red-100
+          ${isSaved ? 'text-red-500' : 'text-gray-400 hover:text-red-500'}
         `}
                     title={isSaved ? 'Remove from saved locations' : 'Save this location'}
                 >
