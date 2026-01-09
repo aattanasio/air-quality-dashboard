@@ -5,7 +5,6 @@ A modern, responsive web application for monitoring real-time air quality and we
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://air-quality-dashboard-git-main-asja-attanasios-projects.vercel.app/)
 [![React](https://img.shields.io/badge/React-18.3-blue)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 🚀 Live Demo
 
