@@ -36,6 +36,12 @@ function App() {
 
   const [savedLocations, setSavedLocations] = useLocalStorage<SavedLocation[]>('savedLocations', []);
   const [activeTab, setActiveTab] = useState('current');
+  const [shouldThrowError, setShouldThrowError] = useState(false);
+
+  // Throw error when state changes
+  if (shouldThrowError) {
+    throw new Error('Test error!');
+  }
 
   const lat = selectedLat ?? geoLatitude;
   const lon = selectedLon ?? geoLongitude;
@@ -240,6 +246,7 @@ function App() {
               </div>
             </div>
           </div>
+
         )}
 
       </div>
