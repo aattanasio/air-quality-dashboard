@@ -99,7 +99,7 @@ For production deployment, add the following environment variable in your hostin
 | VITE_OPENWEATHER_API_KEY | Your OpenWeather API key |
 ```
 
-# 📁 Project Structure
+## 📁 Project Structure
 ```
 air-quality-dashboard/
 ├── public/              # Static assets
@@ -120,7 +120,7 @@ air-quality-dashboard/
 └── README.md
 ```
 
-# 🔑 API Usage
+## 🔑 API Usage
 This application uses the OpenWeather API with two endpoints:
 
 ### Air Pollution API
@@ -136,7 +136,7 @@ GET https://api.openweathermap.org/data/2.5/forecast
 ```
 Returns current weather conditions and 5-day forecast.
 
-# 🎨 Features Showcase
+## 🎨 Features Showcase
 ### Air Quality Index (AQI) Scale
 - Good (1): Green - Air quality is satisfactory
 - Fair (2): Yellow - Acceptable for most people
@@ -150,7 +150,7 @@ Returns current weather conditions and 5-day forecast.
 - Smooth animations and transitions
 - Responsive layout adapting to screen size
 
-# 🤝 Contributing
+## 🤝 Contributing
 Contributions are welcome! Please follow these steps:
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -158,7 +158,7 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-# 🙏 Acknowledgments
+## 🙏 Acknowledgments
 - Weather data provided by [OpenWeather](https://openweathermap.org/)
 - Icons from [Lucide React](https://lucide.dev/)
 - Chart library by [Recharts](https://recharts.github.io/)
