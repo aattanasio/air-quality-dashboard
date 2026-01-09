@@ -4,6 +4,7 @@ import type { AirQualityResponse, Location, WeatherData, WeatherForecast } from 
 // Get API key from environment variable
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
+
 // Base function to make API requests
 async function fetchFromAPI<T>(endpoint: string): Promise<T> {
     const response = await fetch(endpoint);

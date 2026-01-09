@@ -51,6 +51,7 @@ function App() {
     setSelectedLat(latitude);
     setSelectedLon(longitude);
     setSelectedLocationName(name);
+    setActiveTab('current');
   };
 
   const handleSaveLocation = () => {
