@@ -21,12 +21,14 @@ export function SavedLocations({
 }: SavedLocationsProps) {
     if (savedLocations.length === 0) {
         return (
-            <div className="bg-white rounded-lg shadow-md p-6">
-                <div className="flex items-center gap-2 mb-4">
-                    <Heart className="w-5 h-5 text-gray-400" />
-                    <h2 className="text-lg font-semibold text-gray-800">Saved Locations</h2>
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100 p-6">
+                <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-gray-100 rounded-xl">
+                        <Heart className="w-5 h-5 text-gray-400" />
+                    </div>
+                    <h2 className="text-lg font-bold text-gray-900">Saved Locations</h2>
                 </div>
-                <p className="text-gray-500 text-sm text-center py-4">
+                <p className="text-gray-500 text-sm text-center py-6 leading-relaxed">
                     No saved locations yet. Search for a city and save it to quickly check its air quality later.
                 </p>
             </div>
@@ -34,11 +36,13 @@ export function SavedLocations({
     }
 
     return (
-        <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center gap-2 mb-4">
-                <Heart className="w-5 h-5 text-red-500" />
-                <h2 className="text-lg font-semibold text-gray-800">Saved Locations</h2>
-                <span className="text-sm text-gray-500">({savedLocations.length})</span>
+        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100 p-6">
+            <div className="flex items-center gap-3 mb-5">
+                <div className="p-2 bg-red-50 rounded-xl">
+                    <Heart className="w-5 h-5 text-red-500" />
+                </div>
+                <h2 className="text-lg font-bold text-gray-900">Saved Locations</h2>
+                <span className="px-2 py-0.5 text-xs font-bold text-blue-600 bg-blue-50 rounded-full">{savedLocations.length}</span>
             </div>
 
             <div className="space-y-2">
@@ -55,24 +59,26 @@ export function SavedLocations({
                         <div
                             key={location.id}
                             className={`
-                flex items-center justify-between p-3 rounded-lg border
-                transition-all
+                flex items-center justify-between p-3.5 rounded-xl border-2 shadow-sm
+                transition-all duration-200
                 ${isActive
-                                    ? 'bg-blue-50 border-blue-300'
-                                    : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
+                                    ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-300 shadow-md'
+                                    : 'bg-white border-gray-200 hover:bg-gray-50 hover:border-gray-300'
                                 }
               `}
                         >
                             <button
                                 onClick={() => onSelectLocation(location.lat, location.lon, locationName)}
-                                className="flex items-center gap-2 flex-1 text-left"
+                                className="flex items-center gap-3 flex-1 text-left"
                             >
-                                <MapPin className={`w-4 h-4 ${isActive ? 'text-blue-600' : 'text-gray-400'}`} />
+                                <div className={`p-1.5 rounded-lg ${isActive ? 'bg-blue-100' : 'bg-gray-100'}`}>
+                                    <MapPin className={`w-4 h-4 ${isActive ? 'text-blue-600' : 'text-gray-500'}`} />
+                                </div>
                                 <div>
-                                    <p className={`font-medium ${isActive ? 'text-blue-900' : 'text-gray-800'}`}>
+                                    <p className={`font-bold text-sm ${isActive ? 'text-blue-900' : 'text-gray-800'}`}>
                                         {location.name}
                                     </p>
-                                    <p className="text-xs text-gray-500">
+                                    <p className="text-xs text-gray-500 font-medium">
                                         {location.state && `${location.state}, `}{location.country}
                                     </p>
                                 </div>
@@ -80,7 +86,7 @@ export function SavedLocations({
 
                             <button
                                 onClick={() => onRemoveLocation(location.id)}
-                                className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
+                                className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
                                 title="Remove location"
                             >
                                 <Trash2 className="w-4 h-4" />

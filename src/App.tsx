@@ -97,13 +97,24 @@ function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-400 to-blue-600 p-4 lg:p-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center justify-center gap-3 mb-8">
-          <Wind className="w-10 h-10 text-white" />
-          <h1 className="text-4xl font-bold text-white text-center">
-            Air Quality Dashboard
-          </h1>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-4 lg:p-8 relative">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(0 0 0) 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
+
+      <div className="max-w-6xl mx-auto relative">
+        {/* Enhanced header with glassmorphism effect */}
+        <div className="backdrop-blur-sm bg-white/80 rounded-2xl shadow-lg border border-white/50 p-6 mb-8">
+          <div className="flex items-center justify-center gap-4">
+            <div className="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl shadow-lg">
+              <Wind className="w-8 h-8 text-white" />
+            </div>
+            <div>
+              <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent leading-tight pb-1">
+                Air Quality Dashboard
+              </h1>
+              <p className="text-sm text-gray-600 mt-1">Real-time air quality monitoring and forecasts</p>
+            </div>
+          </div>
         </div>
 
         <div className="mb-6">
@@ -111,19 +122,21 @@ function App() {
         </div>
 
         {(geoLoading || loading) && (
-          <div className="bg-white rounded-lg p-12">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-100 p-12">
             <LoadingSpinner size="large" />
-            <p className="text-center mt-4 text-gray-600">
+            <p className="text-center mt-4 text-gray-600 font-medium">
               {geoLoading ? 'Getting your location...' : 'Loading air quality data...'}
             </p>
           </div>
         )}
 
         {(geoError || error) && !data && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+          <div className="bg-red-50/80 backdrop-blur-sm border-2 border-red-200 rounded-2xl shadow-lg p-6">
             <div className="flex items-center gap-3">
-              <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
-              <p className="text-red-800">
+              <div className="p-2 bg-red-100 rounded-lg">
+                <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
+              </div>
+              <p className="text-red-800 font-medium">
                 {geoError || error}
               </p>
             </div>
@@ -142,23 +155,17 @@ function App() {
                 {/* Current Air Quality Tab */}
                 {activeTab === 'current' && (
                   <>
-                    <div className="animate-slideInUp" style={{ animationDelay: '0ms' }}>
-                      <AirQualityCard
-                        aqi={data.list[0].main.aqi}
-                        location={selectedLocationName || (locationLoading ? 'Loading location...' : displayName)}
-                        timestamp={new Date(data.list[0].dt * 1000)}
-                        isSaved={isCurrentLocationSaved}
-                        onToggleSave={handleSaveLocation}
-                      />
-                    </div>
+                    <AirQualityCard
+                      aqi={data.list[0].main.aqi}
+                      location={selectedLocationName || (locationLoading ? 'Loading location...' : displayName)}
+                      timestamp={new Date(data.list[0].dt * 1000)}
+                      isSaved={isCurrentLocationSaved}
+                      onToggleSave={handleSaveLocation}
+                    />
 
-                    <div className="animate-slideInUp" style={{ animationDelay: '150ms' }}>
-                      <HealthRecommendation aqi={data.list[0].main.aqi} />
-                    </div>
+                    <HealthRecommendation aqi={data.list[0].main.aqi} />
 
-                    <div className="animate-slideInUp" style={{ animationDelay: '300ms' }}>
-                      <PollutantDetails pollutants={data.list[0].components} />
-                    </div>
+                    <PollutantDetails pollutants={data.list[0].components} />
                   </>
                 )}
 
@@ -183,41 +190,37 @@ function App() {
                 {/* Weather Tab */}
                 {activeTab === 'weather' && weatherData && !weatherLoading && (
                   <div className="grid grid-cols-1 gap-6">
-                    <div className="animate-scaleIn" style={{ animationDelay: '0ms' }}>
-                      <WeatherCard weather={weatherData} />
-                    </div>
+                    <WeatherCard weather={weatherData} />
 
-                    <div className="animate-slideInUp" style={{ animationDelay: '200ms' }}>
-                      <div className="bg-white rounded-lg shadow-md p-6">
-                        <h3 className="text-lg font-semibold text-gray-800 mb-3">
-                          Weather & Air Quality Correlation
-                        </h3>
-                        <div className="space-y-3 text-sm text-gray-600">
-                          <div className="flex items-start gap-2">
-                            <span className="font-medium text-gray-800">Wind:</span>
-                            <p>
-                              {weatherData.wind.speed > 5
-                                ? 'Strong winds help disperse pollutants, improving air quality.'
-                                : 'Light winds may allow pollutants to accumulate.'}
-                            </p>
-                          </div>
-                          <div className="flex items-start gap-2">
-                            <span className="font-medium text-gray-800">Humidity:</span>
-                            <p>
-                              {weatherData.main.humidity > 70
-                                ? 'High humidity can increase particulate matter concentration.'
-                                : 'Moderate humidity levels are favorable for air quality.'}
-                            </p>
-                          </div>
-                          <div className="flex items-start gap-2">
-                            <span className="font-medium text-gray-800">Temperature:</span>
-                            <p>
-                              Current temperature of {Math.round(weatherData.main.temp)}°C
-                              {weatherData.main.temp > 30
-                                ? ' may increase ground-level ozone formation.'
-                                : ' is within normal range for air quality.'}
-                            </p>
-                          </div>
+                    <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100 p-6">
+                      <h3 className="text-lg font-bold text-gray-900 mb-4">
+                        Weather & Air Quality Correlation
+                      </h3>
+                      <div className="space-y-4 text-sm text-gray-600">
+                        <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100">
+                          <span className="font-bold text-gray-900 min-w-[80px]">Wind:</span>
+                          <p className="leading-relaxed">
+                            {weatherData.wind.speed > 5
+                              ? 'Strong winds help disperse pollutants, improving air quality.'
+                              : 'Light winds may allow pollutants to accumulate.'}
+                          </p>
+                        </div>
+                        <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100">
+                          <span className="font-bold text-gray-900 min-w-[80px]">Humidity:</span>
+                          <p className="leading-relaxed">
+                            {weatherData.main.humidity > 70
+                              ? 'High humidity can increase particulate matter concentration.'
+                              : 'Moderate humidity levels are favorable for air quality.'}
+                          </p>
+                        </div>
+                        <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100">
+                          <span className="font-bold text-gray-900 min-w-[80px]">Temperature:</span>
+                          <p className="leading-relaxed">
+                            Current temperature of {Math.round(weatherData.main.temp)}°C
+                            {weatherData.main.temp > 30
+                              ? ' may increase ground-level ozone formation.'
+                              : ' is within normal range for air quality.'}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -228,14 +231,12 @@ function App() {
 
               {/* Saved locations sidebar - visible on all tabs */}
               <div className="w-full lg:w-80">
-                <div className="animate-slideInLeft" style={{ animationDelay: '400ms' }}>
-                  <SavedLocations
-                    savedLocations={savedLocations}
-                    onSelectLocation={handleLocationSelect}
-                    onRemoveLocation={handleRemoveLocation}
-                    currentLocation={{ lat, lon }}
-                  />
-                </div>
+                <SavedLocations
+                  savedLocations={savedLocations}
+                  onSelectLocation={handleLocationSelect}
+                  onRemoveLocation={handleRemoveLocation}
+                  currentLocation={{ lat, lon }}
+                />
               </div>
             </div>
           </div>

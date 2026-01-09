@@ -93,33 +93,40 @@ export function PollutantDetails({ pollutants }: PollutantDetailsProps) {
     };
 
     return (
-        <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                Pollutant Details
-            </h2>
+        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100 p-6">
+            <div className="flex items-center gap-3 mb-5">
+                <div className="p-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl">
+                    <Wind className="w-5 h-5 text-white" />
+                </div>
+                <h2 className="text-xl font-bold text-gray-900">
+                    Pollutant Details
+                </h2>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {pollutantData.map((pollutant) => (
                     <div
                         key={pollutant.name}
                         className={`
-              border-2 rounded-lg p-4 transition-all
+              border-2 rounded-xl p-5 transition-all shadow-sm hover:shadow-md
               ${getLevelColor(pollutant.level)}
             `}
                     >
-                        <div className="flex items-start justify-between mb-2">
-                            <div className="flex items-center gap-2">
-                                {pollutant.icon}
-                                <h3 className="font-semibold text-lg">{pollutant.name}</h3>
+                        <div className="flex items-start justify-between mb-3">
+                            <div className="flex items-center gap-3">
+                                <div className="p-1.5 bg-white/60 rounded-lg">
+                                    {pollutant.icon}
+                                </div>
+                                <h3 className="font-bold text-lg">{pollutant.name}</h3>
                             </div>
                             <div className="text-right">
-                                <p className="text-2xl font-bold">
+                                <p className="text-2xl font-extrabold">
                                     {pollutant.value.toFixed(1)}
                                 </p>
-                                <p className="text-xs opacity-75">{pollutant.unit}</p>
+                                <p className="text-xs font-medium opacity-75">{pollutant.unit}</p>
                             </div>
                         </div>
-                        <p className="text-sm opacity-80">
+                        <p className="text-sm opacity-90 leading-relaxed">
                             {pollutant.description}
                         </p>
                     </div>
@@ -127,16 +134,16 @@ export function PollutantDetails({ pollutants }: PollutantDetailsProps) {
             </div>
 
             {/* Additional pollutants (less important, shown in compact format) */}
-            <div className="mt-4 pt-4 border-t border-gray-200">
-                <p className="text-sm text-gray-600 mb-2">Other pollutants:</p>
+            <div className="mt-5 pt-5 border-t border-gray-200">
+                <p className="text-sm text-gray-600 font-semibold mb-3">Other pollutants:</p>
                 <div className="flex flex-wrap gap-3">
-                    <div className="text-sm">
-                        <span className="font-medium text-gray-700">CO:</span>{' '}
-                        <span className="text-gray-600">{pollutants.co.toFixed(1)} μg/m³</span>
+                    <div className="px-3 py-2 bg-gray-50 rounded-lg border border-gray-200">
+                        <span className="font-bold text-gray-700 text-sm">CO:</span>{' '}
+                        <span className="text-gray-600 text-sm font-medium">{pollutants.co.toFixed(1)} μg/m³</span>
                     </div>
-                    <div className="text-sm">
-                        <span className="font-medium text-gray-700">SO₂:</span>{' '}
-                        <span className="text-gray-600">{pollutants.so2.toFixed(1)} μg/m³</span>
+                    <div className="px-3 py-2 bg-gray-50 rounded-lg border border-gray-200">
+                        <span className="font-bold text-gray-700 text-sm">SO₂:</span>{' '}
+                        <span className="text-gray-600 text-sm font-medium">{pollutants.so2.toFixed(1)} μg/m³</span>
                     </div>
                 </div>
             </div>

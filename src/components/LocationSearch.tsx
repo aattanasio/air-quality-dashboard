@@ -56,13 +56,15 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
         <div className="relative">
             {/* Search input */}
             <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <div className="absolute left-4 top-1/2 transform -translate-y-1/2 p-1.5 bg-blue-50 rounded-lg">
+                    <Search className="w-4 h-4 text-blue-600" />
+                </div>
                 <input
                     type="text"
                     value={query}
                     onChange={(e) => handleSearch(e.target.value)}
                     placeholder="Search for a city..."
-                    className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full pl-14 pr-12 py-4 border-2 border-gray-200 rounded-2xl bg-white/95 backdrop-blur-sm shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-medium placeholder:text-gray-400"
                 />
                 {loading && (
                     <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue-500 animate-spin" />
@@ -78,15 +80,15 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
 
             {/* Search results dropdown */}
             {showResults && results.length > 0 && (
-                <div className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-64 overflow-y-auto">
+                <div className="absolute z-10 w-full mt-3 bg-white/95 backdrop-blur-sm border-2 border-gray-200 rounded-2xl shadow-2xl max-h-64 overflow-y-auto">
                     {results.map((location, index) => (
                         <button
                             key={`${location.name}-${location.lat}-${location.lon}-${index}`}
                             onClick={() => handleSelectLocation(location)}
-                            className="w-full px-4 py-3 text-left hover:bg-blue-50 transition-colors border-b border-gray-100 last:border-b-0"
+                            className="w-full px-5 py-3.5 text-left hover:bg-blue-50 transition-all border-b border-gray-100 last:border-b-0 first:rounded-t-2xl last:rounded-b-2xl"
                         >
-                            <p className="font-medium text-gray-800">{location.name}</p>
-                            <p className="text-sm text-gray-500">
+                            <p className="font-bold text-gray-900">{location.name}</p>
+                            <p className="text-sm text-gray-600 font-medium">
                                 {location.state && `${location.state}, `}{location.country}
                             </p>
                         </button>

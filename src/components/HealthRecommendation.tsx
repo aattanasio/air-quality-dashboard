@@ -37,14 +37,16 @@ export function HealthRecommendation({ aqi }: HealthRecommendationProps) {
     const { Icon, color, bgColor, borderColor } = getIconConfig();
 
     return (
-        <div className={`${bgColor} border-l-4 ${borderColor} p-4 rounded`}>
-            <div className="flex items-start gap-3">
-                <Icon className={`w-6 h-6 ${color} flex-shrink-0 mt-0.5`} />
-                <div>
-                    <h4 className={`font-semibold ${color} mb-1`}>
+        <div className={`${bgColor} border-l-4 ${borderColor} p-5 rounded-2xl shadow-md border border-gray-100/50`}>
+            <div className="flex items-start gap-4">
+                <div className={`p-2.5 ${bgColor} rounded-xl ring-2 ring-white shadow-sm`}>
+                    <Icon className={`w-5 h-5 ${color} flex-shrink-0`} />
+                </div>
+                <div className="flex-1">
+                    <h4 className={`font-bold ${color} mb-2 text-base`}>
                         Health Recommendation
                     </h4>
-                    <p className="text-gray-700 text-sm">
+                    <p className="text-gray-700 text-sm leading-relaxed">
                         {recommendation}
                     </p>
                 </div>

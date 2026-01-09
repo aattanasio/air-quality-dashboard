@@ -67,10 +67,12 @@ export function AirQualityForecast({ forecastData }: AirQualityForecastProps) {
     const dailyForecast = getDailyForecast();
 
     return (
-        <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center gap-2 mb-6">
-                <TrendingUp className="w-5 h-5 text-blue-600" />
-                <h2 className="text-xl font-semibold text-gray-800">5-Day Forecast</h2>
+        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100 p-6">
+            <div className="flex items-center gap-3 mb-6">
+                <div className="p-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl">
+                    <TrendingUp className="w-5 h-5 text-white" />
+                </div>
+                <h2 className="text-xl font-bold text-gray-900">5-Day Forecast</h2>
             </div>
 
             {/* Daily forecast cards */}
@@ -81,22 +83,24 @@ export function AirQualityForecast({ forecastData }: AirQualityForecastProps) {
                     return (
                         <div
                             key={day.date}
-                            className="border-2 border-gray-200 rounded-lg p-3 text-center transition-all duration-300 hover:scale-105 hover:shadow-lg bg-white"
+                            className="border-2 border-gray-200 rounded-xl p-4 text-center transition-all duration-300 hover:scale-105 hover:shadow-lg bg-white hover:border-blue-300"
                             style={{
                                 animationDelay: `${index * 100}ms`,
                                 animation: 'fadeInUp 0.5s ease-out forwards'
                             }}
                         >
-                            <div className="flex items-center justify-center gap-1 mb-2">
-                                <Calendar className="w-3 h-3 text-gray-500" />
-                                <p className="text-sm font-medium text-gray-700">{day.date}</p>
+                            <div className="flex items-center justify-center gap-1.5 mb-3">
+                                <div className="p-1 bg-blue-50 rounded-lg">
+                                    <Calendar className="w-3 h-3 text-blue-600" />
+                                </div>
+                                <p className="text-sm font-bold text-gray-700">{day.date}</p>
                             </div>
                             <div
-                                className={`${aqiInfo.color} w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2 shadow-md`}
+                                className={`${aqiInfo.color} w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-md ring-2 ring-white/50`}
                             >
-                                <span className="text-xl font-bold text-white">{day.aqi}</span>
+                                <span className="text-xl font-extrabold text-white">{day.aqi}</span>
                             </div>
-                            <p className={`text-xs font-semibold ${aqiInfo.textColor}`}>
+                            <p className={`text-xs font-bold ${aqiInfo.textColor}`}>
                                 {aqiInfo.label}
                             </p>
                         </div>
@@ -106,7 +110,10 @@ export function AirQualityForecast({ forecastData }: AirQualityForecastProps) {
 
             {/* AQI Trend Chart with Gradient */}
             <div className="mb-6">
-                <h3 className="text-sm font-semibold text-gray-700 mb-3">AQI Trend</h3>
+                <h3 className="text-sm font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <div className="w-1 h-4 bg-gradient-to-b from-blue-500 to-indigo-600 rounded-full"></div>
+                    AQI Trend
+                </h3>
                 <ResponsiveContainer width="100%" height={200}>
                     <AreaChart data={dailyForecast}>
                         <defs>
@@ -151,7 +158,10 @@ export function AirQualityForecast({ forecastData }: AirQualityForecastProps) {
 
             {/* Pollutants Chart with Gradients */}
             <div>
-                <h3 className="text-sm font-semibold text-gray-700 mb-3">Pollutant Levels (μg/m³)</h3>
+                <h3 className="text-sm font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <div className="w-1 h-4 bg-gradient-to-b from-blue-500 to-indigo-600 rounded-full"></div>
+                    Pollutant Levels (μg/m³)
+                </h3>
                 <ResponsiveContainer width="100%" height={250}>
                     <AreaChart data={dailyForecast}>
                         <defs>
