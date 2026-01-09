@@ -1,4 +1,4 @@
-# Air Quality Dashboard 🌍
+# Air Quality Dashboard
 
 A modern, responsive web application for monitoring real-time air quality and weather conditions worldwide. Built with React and TypeScript, the dashboard provides comprehensive environmental data with interactive visualizations and health recommendations.
 
@@ -15,7 +15,7 @@ Check out the live application: [Air Quality Dashboard](https://air-quality-dash
 ### Air Quality Monitoring
 - **Real-time AQI Data**: Current Air Quality Index with color-coded status indicators
 - **Health Recommendations**: Personalized suggestions based on current air quality levels
-- **Pollutant Breakdown**: Detailed measurements for:
+- **Pollutant Breakdown** with detailed measurements for:
   - PM2.5 (Fine Particulate Matter)
   - PM10 (Coarse Particulate Matter)
   - CO (Carbon Monoxide)
@@ -55,40 +55,40 @@ Before you begin, ensure you have the following installed:
 ## 🔧 Installation
 
 1. **Clone the repository**
-```
-git clone https://github.com/aattanasio/air-quality-dashboard.git
-cd air-quality-dashboard
-```
+    ```
+    git clone https://github.com/aattanasio/air-quality-dashboard.git
+    cd air-quality-dashboard
+    ```
 2. **Install dependencies**
-```
-npm install
-```
+    ```
+    npm install
+    ```
 3. **Set up environment variables**
-Create a .env file in the root directory:
-```
-VITE_OPENWEATHER_API_KEY=your_api_key_here
-```
-Get your free API key from ([OpenWeather](https://openweathermap.org/api)).
+    Create a .env file in the root directory:
+    ```
+    VITE_OPENWEATHER_API_KEY=your_api_key_here
+    ```
+    Get your free API key from [OpenWeather](https://openweathermap.org/api).
 
 4. **Start the development server**
-```
-npm run dev
-```
-The application will be available at ([http://localhost:5173](http://localhost:5173)).
+    ```
+    npm run dev
+    ```
+    The application will be available at [http://localhost:5173](http://localhost:5173).
 
 ## 🚢 Deployment
 ### Vercel (Recommended)
 1. **Push your code to GitHub**
-```
-git add .
-git commit -m "Initial commit"
-git push origin main
-```
+    ```
+    git add .
+    git commit -m "Initial commit"
+    git push origin main
+    ```
 2. **Deploy to Vercel**
 - Go to **Vercel Dashboard**
 - Click "Add New Project"
 - Import your GitHub repository
-- Add environment variable: VITE_OPENWEATHER_API_KEY
+- Add environment variable: `VITE_OPENWEATHER_API_KEY`
 - Click "Deploy"
 
 ### Environment Variables
@@ -153,18 +153,18 @@ Returns current weather conditions and 5-day forecast.
 # 🤝 Contributing
 Contributions are welcome! Please follow these steps:
 1. Fork the repository
-2. Create a feature branch (git checkout -b feature/amazing-feature)
-3. Commit your changes (git commit -m 'Add amazing feature')
-4. Push to the branch (git push origin feature/amazing-feature)
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
 # 🙏 Acknowledgments
-- Weather data provided by ([OpenWeather](https://openweathermap.org/))
-- Icons from ([Lucide React](https://lucide.dev/))
-- Chart library by ([Recharts](https://recharts.github.io/))
-- Deployed on ([Vercel](https://vercel.com/))
+- Weather data provided by [OpenWeather](https://openweathermap.org/)
+- Icons from [Lucide React](https://lucide.dev/)
+- Chart library by [Recharts](https://recharts.github.io/)
+- Deployed on [Vercel](https://vercel.com/)
 
 # Author
-GitHub: ([aattanasio](https://github.com/aattanasio))
+GitHub: [aattanasio](https://github.com/aattanasio)
 
-Portfolio: ([asjaattanasio.it/projects](https://asjaattanasio.it/projects))
+Portfolio: [asjaattanasio.it/projects](https://asjaattanasio.it/projects)
