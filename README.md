@@ -165,9 +165,6 @@ Contributions are welcome! Please follow these steps:
 - Chart library by ([Recharts](https://recharts.github.io/))
 - Deployed on ([Vercel](https://vercel.com/))
 
-# 🔗 Links
-Live Demo: ([Air Quality Dashboard](air-quality-dashboard-git-main-asja-attanasios-projects.vercel.app))
-
 # Author
 GitHub: ([aattanasio](https://github.com/aattanasio))
 
