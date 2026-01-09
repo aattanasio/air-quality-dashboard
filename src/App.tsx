@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Wind, AlertCircle, Gauge, TrendingUp, CloudSun } from 'lucide-react';
 import { useAirQuality } from './hooks/useAirQuality';
 import { useGeolocation } from './hooks/useGeolocation';
@@ -36,12 +36,6 @@ function App() {
 
   const [savedLocations, setSavedLocations] = useLocalStorage<SavedLocation[]>('savedLocations', []);
   const [activeTab, setActiveTab] = useState('current');
-  const [shouldThrowError, setShouldThrowError] = useState(false);
-
-  // Throw error when state changes
-  if (shouldThrowError) {
-    throw new Error('Test error!');
-  }
 
   const lat = selectedLat ?? geoLatitude;
   const lon = selectedLon ?? geoLongitude;

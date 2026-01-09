@@ -1,7 +1,5 @@
 import { TrendingUp, Calendar } from 'lucide-react';
 import {
-    LineChart,
-    Line,
     AreaChart,
     Area,
     XAxis,
