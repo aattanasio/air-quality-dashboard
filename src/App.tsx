@@ -244,6 +244,27 @@ function App() {
 
         )}
 
+        {/* Credits Footer */}
+        <footer className="mt-12 backdrop-blur-sm bg-white/70 rounded-2xl shadow-lg border border-white/50 p-6">
+          <div className="text-center space-y-3">
+            <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Credits</h3>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-sm text-gray-600">
+              <span>Data provided by</span>
+              <a
+                href="https://openweathermap.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-blue-600 hover:text-blue-700 transition-colors"
+              >
+                OpenWeather API
+              </a>
+            </div>
+            <div className="text-xs text-gray-500 pt-2 border-t border-gray-200">
+              Developed by Asja Attanasio • {new Date().getFullYear()}
+            </div>
+          </div>
+        </footer>
+
       </div>
 
       <style>{`
